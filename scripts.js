@@ -1,11 +1,14 @@
 var field;
 
-function Field(cols, rows, containerId) {
-  this.cols = cols;
-  this.rows = rows;
-  this.container = document.querySelector(containerId);
+class Field {
+  constructor(cols, rows, containerId) {
+    this.cols = cols;
+    this.rows = rows;
+    this.container = document.querySelector(containerId);
+    this.createField();
+  }
 
-  this.createField = function() {
+  createField() {
     var field = [];
     for(var i = 0; i < this.rows; i++){
       field[i] = [];
@@ -17,11 +20,11 @@ function Field(cols, rows, containerId) {
     this.drawField();
   }
 
-  this.createRock = function() {
+  createRock() {
     return Math.trunc(Math.random() * 5) === 1 ? '@' : '';
   }
 
-  this.drawField = function() {
+  drawField() {
     var template = '';
     for(var i = 0; i < this.rows; i++) {
       template += '<tr>';
@@ -35,4 +38,3 @@ function Field(cols, rows, containerId) {
 }
 
 field = new Field(3, 4, '#myTable')
-field.createField();
