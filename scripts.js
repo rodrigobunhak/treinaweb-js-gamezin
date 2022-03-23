@@ -113,7 +113,12 @@ class Npc extends Character {
 }
 
 function startField() {
-  field = new Field(3, 4, '#myTable');
+  var cols = document.querySelector('#cols').value || 3;
+  var rows = document.querySelector('#rows').value || 3;
+
+  document.querySelector('button').disabled = true;
+
+  field = new Field(cols, rows, '#myTable');
   try {
     player = new Player(field);
   } catch (error) {
@@ -122,5 +127,18 @@ function startField() {
   }
 }
 
-startField();
-
+window.addEventListener('keyup', function(event) {
+  if(player) {
+    const A = 65,
+          S = 83,
+          D = 68,
+          W = 87;
+    
+    switch(event.keyCode) {
+      case A: player.left(); break;
+      case S: player.down(); break;
+      case D: player.right(); break;
+      case W: player.up(); break;
+    }
+  }
+})
